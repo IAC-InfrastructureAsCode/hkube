@@ -1787,7 +1787,6 @@ describe('API-Server', () => {
                             });
                         });
                     });
-
                     describe('Store/Algorithms', () => {
                         let restPath = null;
                         let applyPath = null;
@@ -2335,7 +2334,7 @@ describe('API-Server', () => {
                                 expect(response.body.error.message).to.equal(MESSAGES.APPLY_ERROR);
                             });
                         });
-                        describe('/store/algorithms PUT', () => {
+                        describe.only('/store/algorithms PUT', () => {
                             it('should throw validation error of memory min 4 Mi', async () => {
                                 const body = Object.assign({}, algorithms[0]);
                                 body.mem = '3900Ki';
@@ -2378,7 +2377,7 @@ describe('API-Server', () => {
 
                                     };
                                     const res = await _request(options);
-                                    const filterdRes = res.body.find(r=>r.buildId.includes('green-alg'))
+                                    const filterdRes = res.body.find(r => r.buildId.includes('green-alg'))
                                     expect(filterdRes).to.not.be.null
                                 })
                                 it('should create build with last commit data', async () => {

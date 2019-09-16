@@ -16,6 +16,7 @@ class AlgorithmStore {
             throw new ResourceNotFoundError('algorithm', options.name);
         }
         await stateManager.setAlgorithm(options);
+        await this._saveAlgorithmVersion(options);
         return options;
     }
 
@@ -134,6 +135,10 @@ class AlgorithmStore {
             builds.removeFile(options.file);
         }
         return { buildId, messages };
+    }
+
+    async _saveAlgorithmVersion(algorithm) {
+        await storageManager.hkubeStore.put({ type: 'algorithm', name: algorithm.name, data: algorithm });
     }
 }
 
